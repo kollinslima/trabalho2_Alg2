@@ -9,6 +9,10 @@
 #define NOME_INDICE "arvore.idx"
 #define NOME_LOG "log_X.txt"
 
+typedef struct{
+    int RRN_raiz;
+    int atualizado;
+}tHeader;
 
 typedef struct{
     int id;

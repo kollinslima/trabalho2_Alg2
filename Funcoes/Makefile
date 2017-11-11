@@ -1,10 +1,10 @@
 OPTIONS = -DNDEBUG
 
 all:
-	gcc $(OPTIONS) *.c -c
+	gcc $(OPTIONS) *.c -c -I "../Btree"
 	mv *.o ../
 	
-debug:
-	gcc *.c -c
+Debug:
+	gcc *.c -c -I "../Btree"
 	mv *.o ../
 	

@@ -7,9 +7,9 @@ all:
 	gcc $(OPTIONS) *.o -o trab_run
 	rm *.o
 	
-debug:
-	cd Btree; make debug;
-	cd Funcoes; make debug;
+Debug:
+	cd Btree; make Debug;
+	cd Funcoes; make Debug;
 	gcc *.c -c -I "Funcoes" -I "Btree"
 	gcc *.o -o trab_run
 	rm *.o
