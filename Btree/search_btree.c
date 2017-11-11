@@ -1,6 +1,7 @@
 #include<stdio.h>
+#include"btree.h"
 
-int searchBTree(FILE *fi, int RRN, int key, int found_RRN, int found_position){
+int search_btree(FILE *fi, int RRN, int key, int found_RRN, int found_position){
     
     int position;
     tPage = search_page;

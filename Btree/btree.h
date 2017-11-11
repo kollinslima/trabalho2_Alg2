@@ -11,6 +11,7 @@ typedef struct {
     int isLeaf;
 } tPage; 
 
-int searchBTree(FILE *fi, int RRN, int key, int found_RRN, int found_position);
+tPage read_page(FILE *fi, int RRN);
+int search_btree(FILE *fi, int RRN, int key, int found_RRN, int found_position);
 
 #endif
