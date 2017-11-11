@@ -10,11 +10,6 @@
 #define NOME_LOG "log_X.txt"
 
 typedef struct{
-    int RRN_raiz;
-    int atualizado;
-}tHeader;
-
-typedef struct{
     int id;
     char titulo[30];
     char genero[20];
