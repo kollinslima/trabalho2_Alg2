@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<assert.h>
 #include"funcoes.h"
+#include"btree.h"
 
 /*
 Função de inicialização:
@@ -8,6 +9,7 @@ Função de inicialização:
 -Confere se indice está atualizado
 */
 int init (FILE **fd, FILE **fi, FILE **fl){
+    
     (*fd) = fopen(NOME_DADOS,"r+b");
     
     if((*fd) == NULL){                      //Verifica existência do arquivo
@@ -30,6 +32,16 @@ int init (FILE **fd, FILE **fi, FILE **fl){
             printf("ERRO AO CRIAR ARQUIVO DE INDICE");
             return -1;
         }
+        
+        /***********Cria novo header para arquivo de índice***********/
+        tHeader new_header;
+        new_header.root_RRN = -1;
+        new_header.updated = 1;
+        
+        int error_test;
+        error_test = fwrite(&new_header, sizeof(tHeader), 1, (*fi));
+        
+        assert(error_test == 1);
     }
     
     (*fl) = fopen(NOME_LOG,"r+");

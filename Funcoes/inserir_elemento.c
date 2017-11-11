@@ -2,8 +2,15 @@
 #include<string.h>
 #include<assert.h>
 #include"funcoes.h"
+#include"btree.h"
 
 int inserir_elemento (FILE *fd, FILE *fi, FILE *fl){
+    
+    tHeader header;
+    tKey insert_key, promo_key;
+    int propo_r_child;
+    
+    int error;
     
     char buffer[MAX_BUFFER_SIZE],
          buffer_size,
@@ -32,10 +39,18 @@ int inserir_elemento (FILE *fd, FILE *fi, FILE *fl){
     assert(buffer != NULL);
     
     /*************ESCRITA NO ARQUIVO DE DADOS******************/
+    insert_key.key = novo_registro.id;
+    insert_key.offset = ftell(fd);
+    
     assert(fd != NULL);
     fwrite(&buffer_size,sizeof(buffer_size),1,fd);
     fwrite(buffer,buffer_size,1,fd);
     
-    puts("IMPLEMENTAR BTREE");
+    header = read_header(fi);
+    
+    error = insert_btree(fi, header.root_RRN, insert_key, promo_key, propo_r_child);
+    
+    //TRATAR ERROS
+    
     return 0;
 }

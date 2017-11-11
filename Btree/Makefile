@@ -1,19 +1,11 @@
 OPTIONS = -DNDEBUG
 
 all:
-	cd aux_functions
+	cd aux_functions; make;
 	gcc $(OPTIONS) *.c -c 
-	mv *.o ..
-	
-	cd ..
-	gcc $(OPTIONS) *.c -c
 	mv *.o ../
-	
+
 Debug:
-	cd aux_functions
+	cd aux_functions; make;
 	gcc *.c -c 
-	mv *.o ..
-	
-	cd ..
-	gcc *.c -c 
-	mv *.o ..
+	mv *.o ../

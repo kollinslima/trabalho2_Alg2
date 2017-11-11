@@ -4,7 +4,7 @@
 
 int pesquisar_elemento (FILE *fd, FILE *fi, FILE *fl){
     
-    tHeader = header;
+    tHeader header;
     
     int elemento_encontrado,
         chave_busca,
@@ -16,7 +16,7 @@ int pesquisar_elemento (FILE *fd, FILE *fi, FILE *fl){
     printf("Digite o ID a ser buscado: ");
     scanf("%d", &chave_busca);
     
-    elemento_encontrado = searchBTree(fi, header.root_RRN, chave_busca, retorno_RRN, retorno_posicao);
+    elemento_encontrado = search_btree(fi, header.root_RRN, chave_busca, retorno_RRN, retorno_posicao);
     
     //Encontrou elemento
     if(elemento_encontrado){
