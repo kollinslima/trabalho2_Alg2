@@ -28,6 +28,8 @@ tHeader read_header(FILE *fi);
 
 int insert_btree(FILE *fi, int RRN, tKey key, tKey propo_key, int propo_r_child);
 int search_btree(FILE *fi, int RRN, int key, int found_RRN, int found_position);
+int sort_keys(tKey *key_array, int size);
+int update_root(FILE *fi, int new_root);
 int write_page(FILE *fi, tPage actual_page, int RRN);
 
 #endif

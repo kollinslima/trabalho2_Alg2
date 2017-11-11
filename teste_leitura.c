@@ -27,8 +27,8 @@ typedef struct {
 void main(void){
     
     FILE *fi = fopen(NOME_INDICE,"r+b");
-    
-     tHeader reader;
+    int i;
+    tHeader reader;
     
     fseek(fi, 0, SEEK_SET);
     fread(&reader, sizeof(tHeader),1,fi);
@@ -44,8 +44,13 @@ void main(void){
     fread(&reader_page, sizeof(tPage),1,fi);
     
     printf("Count: %d\n", reader_page.count);
-    printf("Key: %d\n", reader_page.keys[0].key);
-    printf("Offset: %ld\n", reader_page.keys[0].offset);
-    printf("L_CHILDREN: %d\n", reader_page.children[0]);
+    
+    for(i = 0; i < reader_page.count; i++){
+        printf("Key%d: %d\n", i, reader_page.keys[i].key);
+        printf("Offset%d: %ld\n",i, reader_page.keys[i].offset);
+    }
+    for(i = 0; i < reader_page.count; i++)
+        printf("L_CHILDREN%d: %d\n", i,reader_page.children[i]);
+        
     printf("leaf: %d\n", reader_page.isLeaf);
 }
