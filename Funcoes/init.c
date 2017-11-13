@@ -37,6 +37,7 @@ int init (FILE **fd, FILE **fi, FILE **fl){
         tHeader new_header;
         new_header.root_RRN = -1;
         new_header.updated = 1;
+        new_header.free_slot = 0;
         
         int error_test;
         error_test = fwrite(&new_header, sizeof(tHeader), 1, (*fi));

@@ -1,7 +1,8 @@
 #include<stdio.h>
+#include<assert.h>
 #include"btree.h"
 
-int insert_btree(FILE *fi, int RRN, tKey key, tKey propo_key, int propo_r_child){
+int insert_btree(FILE *fi, int RRN, tKey key, tKey *propo_key, int *propo_r_child){
     
     tPage actual_page;
     
@@ -16,7 +17,7 @@ int insert_btree(FILE *fi, int RRN, tKey key, tKey propo_key, int propo_r_child)
         write_page(fi, actual_page, 0);
         
         update_root(fi, 0);
-        
+        update_free_slot(fi, get_free_RRN(fi) + 1);
     }
     /*************INSERÇÃO EM ARQUIVO NÃO-VAZIO**************/
     else{
@@ -37,7 +38,23 @@ int insert_btree(FILE *fi, int RRN, tKey key, tKey propo_key, int propo_r_child)
             }
             /*************COM OVERFLOW**************/
             else{
-                
+                split(fi, &actual_page, RRN, key, propo_key, propo_r_child);
+                /***************PRIMEIRO SPLIT***************/
+                if(get_root_RRN(fi) == RRN){
+                    
+                    actual_page = new_page();            //"Sobe na recursão"
+                    actual_page.count += 1;
+                    actual_page.keys[actual_page.count-1] = (*propo_key);
+                    actual_page.children[actual_page.count-1] = RRN;
+                    actual_page.children[actual_page.count] = (*propo_r_child);
+                    actual_page.isLeaf = 0;
+        
+                    write_page(fi, actual_page, get_free_RRN(fi));
+                    assert(printf("Escrita Pag: %d\n", get_free_RRN(fi)));
+        
+                    update_root(fi, get_free_RRN(fi));
+                    update_free_slot(fi, get_free_RRN(fi) + 1);
+                }
             }
         }
         /*************NÓ NÃO-FOLHA**************/

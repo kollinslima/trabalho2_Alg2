@@ -1,14 +1,14 @@
 #include<stdio.h>
 #include"btree.h"
 
-int update_root(FILE *fi, int new_root){
+int update_free_slot(FILE *fi, int new_slot){
     
     tHeader reader;
     
     fseek(fi, 0, SEEK_SET);
     fread(&reader, sizeof(tHeader),1,fi);
     
-    reader.root_RRN = new_root;
+    reader.free_slot = new_slot;
     
     fseek(fi, 0, SEEK_SET);
     

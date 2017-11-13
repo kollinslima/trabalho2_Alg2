@@ -10,6 +10,7 @@
 typedef struct{
     int root_RRN;
     int updated;
+    int free_slot;
 }tHeader;
 
 typedef struct{
@@ -35,22 +36,32 @@ void main(void){
     
     printf("Root: %d\n", reader.root_RRN);
     printf("updated: %d\n", reader.updated);
+    printf("free_slot: %d\n", reader.free_slot);
     
     puts("");
     tPage reader_page;
     
     fseek(fi, sizeof(tHeader), SEEK_SET);       //Pula o Header
-    fseek(fi, sizeof(tPage), ftell(fi));
-    fread(&reader_page, sizeof(tPage),1,fi);
     
-    printf("Count: %d\n", reader_page.count);
     
-    for(i = 0; i < reader_page.count; i++){
-        printf("Key%d: %d\n", i, reader_page.keys[i].key);
-        printf("Offset%d: %ld\n",i, reader_page.keys[i].offset);
-    }
-    for(i = 0; i < reader_page.count; i++)
-        printf("L_CHILDREN%d: %d\n", i,reader_page.children[i]);
+    while(fread(&reader_page, sizeof(tPage),1,fi) == 1){
         
-    printf("leaf: %d\n", reader_page.isLeaf);
+        puts("");
+        
+        printf("Count: %d\n", reader_page.count);
+        
+        for(i = 0; i < reader_page.count; i++){
+            printf("Key%d: %d\n", i, reader_page.keys[i].key);
+            printf("Offset%d: %ld\n",i, reader_page.keys[i].offset);
+        }
+        for(i = 0; i < reader_page.count; i++){
+            printf("L_CHILDREN%d: %d\n", i,reader_page.children[i]);
+            printf("R_CHILDREN%d: %d\n", i,reader_page.children[i+1]);
+        }
+            
+        printf("leaf: %d\n", reader_page.isLeaf);
+        
+    
+    
+    }
 }

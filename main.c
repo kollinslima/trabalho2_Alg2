@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include<assert.h>
 #include"funcoes.h"
 #include"btree.h"
 
@@ -7,6 +8,9 @@ int main(void){
     FILE *fd,
          *fi,
          *fl;
+    
+    assert(printf("Ordem: %d\n", ORDER));
+    assert(printf("Chaves: %d\n", N_KEYS));
     
     init(&fd,&fi,&fl);
     

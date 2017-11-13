@@ -6,7 +6,7 @@
 
 int inserir_elemento (FILE *fd, FILE *fi, FILE *fl){
     
-    tHeader header;
+    //tHeader header;
     tKey insert_key, promo_key;
     int propo_r_child;
     
@@ -46,9 +46,11 @@ int inserir_elemento (FILE *fd, FILE *fi, FILE *fl){
     fwrite(&buffer_size,sizeof(buffer_size),1,fd);
     fwrite(buffer,buffer_size,1,fd);
     
-    header = read_header(fi);
+    //header = read_header(fi);
     
-    error = insert_btree(fi, header.root_RRN, insert_key, promo_key, propo_r_child);
+    //assert(printf("rootRRN: %d\n", header.root_RRN));
+    
+    error = insert_btree(fi, get_root_RRN(fi), insert_key, &promo_key, &propo_r_child);
     
     //TRATAR ERROS
     
