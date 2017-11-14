@@ -64,6 +64,10 @@ int insert_btree(FILE *fi, int RRN, tKey key, tKey *propo_key, int *propo_r_chil
         /*************NÓ NÃO-FOLHA**************/
         else{
             assert(printf("No nao folha\n"));
+            
+            int position;
+                
+            position = binary_search(actual_page.keys, actual_page.count, key);
         }
         
     }

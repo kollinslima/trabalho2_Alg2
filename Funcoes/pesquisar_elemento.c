@@ -19,7 +19,7 @@ int pesquisar_elemento (FILE *fd, FILE *fi, FILE *fl){
     elemento_encontrado = search_btree(fi, header.root_RRN, chave_busca, retorno_RRN, retorno_posicao);
     
     //Encontrou elemento
-    if(elemento_encontrado){
+    if(elemento_encontrado > 0){
         
     }
     //Elemento não encontrado
