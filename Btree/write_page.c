@@ -8,9 +8,6 @@ int write_page(FILE *fi, tPage actual_page, int RRN){
     
     fseek(fi, sizeof(tHeader), SEEK_SET);   //Pula o header;
     
-    assert(printf("Posicao atual: %d\n", (int) ftell(fi)));
-    assert(printf("Posicao escrita: %ld\n", RRN*sizeof(tPage)));
-    
     error_test = fseek(fi, RRN*sizeof(tPage), SEEK_CUR);
     
     assert(error_test == 0);

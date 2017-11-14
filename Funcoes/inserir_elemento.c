@@ -48,7 +48,7 @@ int inserir_elemento (FILE *fd, FILE *fi, FILE *fl){
     
     //header = read_header(fi);
     
-    //assert(printf("rootRRN: %d\n", header.root_RRN));
+    assert(printf("rootRRN: %d\n", get_root_RRN(fi)));
     
     error = insert_btree(fi, get_root_RRN(fi), insert_key, &promo_key, &propo_r_child);
     

@@ -8,6 +8,8 @@ int insert_btree(FILE *fi, int RRN, tKey key, tKey *propo_key, int *propo_r_chil
     
     /*************INSERÇÃO EM ARQUIVO VAZIO**************/
     if(RRN < 0){
+        assert(printf("Primeira insercao\n"));
+        
         actual_page = new_page();
         
         actual_page.count += 1;
@@ -26,9 +28,10 @@ int insert_btree(FILE *fi, int RRN, tKey key, tKey *propo_key, int *propo_r_chil
         
         /*************NÓ FOLHA**************/
         if (actual_page.isLeaf){
-            
+            assert(printf("Insercao no folha\n"));
             /*************SEM OVERFLOW**************/
             if(actual_page.count < N_KEYS){
+                assert(printf("Sem overflow\n"));
                 actual_page.count += 1;
                 actual_page.keys[actual_page.count-1] = key;
                 
@@ -38,6 +41,7 @@ int insert_btree(FILE *fi, int RRN, tKey key, tKey *propo_key, int *propo_r_chil
             }
             /*************COM OVERFLOW**************/
             else{
+                assert(printf("Com overflow\n"));
                 split(fi, &actual_page, RRN, key, propo_key, propo_r_child);
                 /***************PRIMEIRO SPLIT***************/
                 if(get_root_RRN(fi) == RRN){
@@ -59,7 +63,7 @@ int insert_btree(FILE *fi, int RRN, tKey key, tKey *propo_key, int *propo_r_chil
         }
         /*************NÓ NÃO-FOLHA**************/
         else{
-            
+            assert(printf("No nao folha\n"));
         }
         
     }
