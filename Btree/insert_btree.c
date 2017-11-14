@@ -64,6 +64,25 @@ int insert_btree(FILE *fi, int RRN, tKey key, tKey *propo_key, int *propo_r_chil
         /*************NÓ NÃO-FOLHA**************/
         else{
             assert(printf("No nao folha\n"));
+            
+            int position;
+                
+            position = binary_search(actual_page.keys, actual_page.count, key);
+    
+            //Descida à direita
+            if(actual_page.keys[position].key < key.key){
+                insert_btree(fi, actual_page.children[position+1], key, propo_key, propo_r_child);
+                //Tratar subida na recursão (chave promovida)
+            }
+            //Descida à esquerda
+            else if(actual_page.keys[position].key > key.key){
+                insert_btree(fi, actual_page.children[position], key, propo_key, propo_r_child);
+                //Tratar subida na recursão (chave promovida)
+            }
+            //Chave já existe
+            else{
+                assert(printf("Chave já existente\n"));    
+            }
         }
         
     }

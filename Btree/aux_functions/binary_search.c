@@ -25,5 +25,5 @@ int binary_search (int *array, int size, int key){
                begin = middle+1;
      }
      
-     return -1;   
+     return middle;   
 }
