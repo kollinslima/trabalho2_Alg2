@@ -32,7 +32,7 @@ int get_root_RRN(FILE *fi);
 int insert_btree(FILE *fi, int RRN, tKey key, tKey *propo_key, int *propo_r_child);
 int search_btree(FILE *fi, int RRN, int key, int found_RRN, int found_position);
 int sort_keys(tKey *key_array, int size);
-int split(FILE *fi, tPage *page, int RRN, tKey key, tKey *propo_key, int *propo_r_child);
+int split(FILE *fi, tPage *page, int RRN, tKey key, int r_child_connect, tKey *propo_key, int *propo_r_child);
 int update_free_slot(FILE *fi, int new_slot);
 int update_root(FILE *fi, int new_root);
 int write_page(FILE *fi, tPage actual_page, int RRN);

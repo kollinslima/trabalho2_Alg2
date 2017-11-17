@@ -42,7 +42,8 @@ int insert_btree(FILE *fi, int RRN, tKey key, tKey *propo_key, int *propo_r_chil
             /*************COM OVERFLOW**************/
             else{
                 assert(printf("Com overflow\n"));
-                split(fi, &actual_page, RRN, key, propo_key, propo_r_child);
+                split(fi, &actual_page, RRN, key, -1, propo_key, propo_r_child);
+                
                 /***************PRIMEIRO SPLIT***************/
                 if(get_root_RRN(fi) == RRN){
                     
@@ -100,10 +101,41 @@ int insert_btree(FILE *fi, int RRN, tKey key, tKey *propo_key, int *propo_r_chil
                     actual_page.children[actual_page.count] = (*propo_r_child);
                     
                     write_page(fi, actual_page, RRN);
+                    assert(printf("Escrita Pag: %d\n", RRN));
+                    
+                    /*
+                    Garante que a chave não será propagada para o nível acima
+                    já que tem espaço no nível atual.
+                    */
+                    (*propo_r_child) = 0;   
                 }
                 //Overvlow em nó não folha
                 else{
                     assert(printf("Overflow no nao folha\n"));
+                    
+                    /*
+                    Salva chave que promoveu overflow
+                    Isso é necessário para que propo_key receba a chave de overflow
+                    como retorno da função "split".
+                    */
+                    tKey aux_key = (*propo_key);
+                    int aux_r_child = (*propo_r_child);
+                    
+                    split(fi, &actual_page, RRN, aux_key, aux_r_child, propo_key, propo_r_child);
+                    
+                    actual_page = new_page();            //"Sobe na recursão"
+                    actual_page.count += 1;
+                    actual_page.keys[actual_page.count-1] = (*propo_key);
+                    actual_page.children[actual_page.count-1] = RRN;
+                    actual_page.children[actual_page.count] = (*propo_r_child);
+                    actual_page.isLeaf = 0;
+        
+                    write_page(fi, actual_page, get_free_RRN(fi));
+                    assert(printf("Escrita Pag: %d\n", get_free_RRN(fi)));
+        
+                    update_root(fi, get_free_RRN(fi));
+                    update_free_slot(fi, get_free_RRN(fi) + 1);
+                    
                 }
             }
         }

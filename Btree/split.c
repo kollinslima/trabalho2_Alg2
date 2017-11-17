@@ -3,12 +3,20 @@
 #include"btree.h"
 
 /*
-Faz a divisão das chaves em 2 novas páginas e as escreve em disco, retornando: 
+Faz a divisão das chaves em 2 nov   as páginas e as escreve em disco
+
+Entrada:
+-fi: arquívo de índice
+-page: página com overflow
+-key: chave que promoveu overflow
+-r_child_connect: ponteiro para o filho da direita da chave de overflow (necessário para split em não-folha).
+
+Saída:
 -propo_key: a chave promovida (se houver);
 -propo_r_child: o ponteiro para a página à direita para ser utilizada pela nova raíz
 -RRN: ponteiro para a página à esquerda (não muda) para ser utilizada pela nova raíz
 */
-int split(FILE *fi, tPage *page, int RRN, tKey key, tKey *propo_key, int *propo_r_child){
+int split(FILE *fi, tPage *page, int RRN, tKey key, int r_child_connect, tKey *propo_key, int *propo_r_child){
     
     int total_keys = N_KEYS;
     int total_ordem = ORDER;
@@ -64,6 +72,7 @@ int split(FILE *fi, tPage *page, int RRN, tKey key, tKey *propo_key, int *propo_
     for(i = (*page).count + 1, j = 0; i < total_ordem; i++, j++)
         pointer_divider[j] = (*page).children[i];
     
+    pointer_divider[j] = r_child_connect;            //Salva último ponteiro
     
     /**********SALVA FILHO DA ESQUERDA**********/
     write_page(fi, (*page), RRN);
