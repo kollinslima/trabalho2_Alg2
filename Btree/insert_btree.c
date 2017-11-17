@@ -35,7 +35,7 @@ int insert_btree(FILE *fi, int RRN, tKey key, tKey *propo_key, int *propo_r_chil
                 actual_page.count += 1;
                 actual_page.keys[actual_page.count-1] = key;
                 
-                sort_keys(actual_page.keys, actual_page.count);
+                sort_keys(actual_page.keys, actual_page.count, actual_page.children);
                 
                 write_page(fi, actual_page, RRN);
             }
@@ -68,17 +68,22 @@ int insert_btree(FILE *fi, int RRN, tKey key, tKey *propo_key, int *propo_r_chil
             
             int position;
                 
-            position = binary_search(actual_page.keys, actual_page.count, key);
+            position = binary_search(actual_page.keys, actual_page.count, key.key);
     
+            assert(printf("Busca binaria: %d\n", position));
+            assert(printf("Elemento aqui: %d\n", actual_page.keys[position].key));
+            
             //Será analisado o valor deste ponteiro para saber se houve chave promovida
             (*propo_r_child) = 0;        
     
             //Descida à direita
             if(actual_page.keys[position].key < key.key){
+                assert(printf("Descita a direita\n"));
                 insert_btree(fi, actual_page.children[position+1], key, propo_key, propo_r_child);
             }
             //Descida à esquerda
             else if(actual_page.keys[position].key > key.key){
+                assert(printf("Descita a esquerda\n"));
                 insert_btree(fi, actual_page.children[position], key, propo_key, propo_r_child);
             }
             //Chave já existe
@@ -99,6 +104,8 @@ int insert_btree(FILE *fi, int RRN, tKey key, tKey *propo_key, int *propo_r_chil
                     actual_page.count += 1;
                     actual_page.keys[actual_page.count-1] = (*propo_key);
                     actual_page.children[actual_page.count] = (*propo_r_child);
+                
+                    sort_keys(actual_page.keys, actual_page.count, actual_page.children);
                     
                     write_page(fi, actual_page, RRN);
                     assert(printf("Escrita Pag: %d\n", RRN));

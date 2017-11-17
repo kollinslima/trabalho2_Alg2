@@ -35,11 +35,15 @@ int split(FILE *fi, tPage *page, int RRN, tKey key, int r_child_connect, tKey *p
         int aux = key.key;
         key.key = (*page).keys[total_keys-1].key;
         (*page).keys[total_keys-1].key = aux;
+        
+        //Move ponteiro da direita para nova posição
+        aux = r_child_connect;
+        r_child_connect = (*page).children[total_keys];
+        (*page).children[total_keys] = aux;
     }
     
     //Ordenação das demais chaves
-    sort_keys((*page).keys, total_keys);
-    
+    sort_keys((*page).keys, total_keys, (*page).children);
     
     assert(printf("Tamanho antigo: %d\n", (*page).count));
     
