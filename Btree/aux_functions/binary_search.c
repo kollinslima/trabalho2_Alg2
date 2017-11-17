@@ -1,6 +1,9 @@
 #include<stdio.h>
 
 //Adaptado de https://pt.wikipedia.org/wiki/Pesquisa_bin%C3%A1ria
+/*
+Retorna a posição onde a chave buscada está (ou deveria estar).
+*/
 
 int binary_search (int *array, int size, int key){
     

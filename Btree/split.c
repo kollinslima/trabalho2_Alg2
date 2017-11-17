@@ -2,6 +2,12 @@
 #include<assert.h>
 #include"btree.h"
 
+/*
+Faz a divisão das chaves em 2 novas páginas e as escreve em disco, retornando: 
+-propo_key: a chave promovida (se houver);
+-propo_r_child: o ponteiro para a página à direita para ser utilizada pela nova raíz
+-RRN: ponteiro para a página à esquerda (não muda) para ser utilizada pela nova raíz
+*/
 int split(FILE *fi, tPage *page, int RRN, tKey key, tKey *propo_key, int *propo_r_child){
     
     int total_keys = N_KEYS;

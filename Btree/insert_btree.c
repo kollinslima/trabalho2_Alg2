@@ -69,22 +69,44 @@ int insert_btree(FILE *fi, int RRN, tKey key, tKey *propo_key, int *propo_r_chil
                 
             position = binary_search(actual_page.keys, actual_page.count, key);
     
+            //Será analisado o valor deste ponteiro para saber se houve chave promovida
+            (*propo_r_child) = 0;        
+    
             //Descida à direita
             if(actual_page.keys[position].key < key.key){
                 insert_btree(fi, actual_page.children[position+1], key, propo_key, propo_r_child);
-                //Tratar subida na recursão (chave promovida)
             }
             //Descida à esquerda
             else if(actual_page.keys[position].key > key.key){
                 insert_btree(fi, actual_page.children[position], key, propo_key, propo_r_child);
-                //Tratar subida na recursão (chave promovida)
             }
             //Chave já existe
             else{
                 assert(printf("Chave já existente\n"));    
+                //Tratar log
+                return -1; //Criar mensagem de erro
+            }
+            
+            //Houve chave promovida
+            if((*propo_r_child) != 0){
+                
+                assert(printf("Chave promovida - nao folha\n"));
+                
+                //Sem overflow
+                if(actual_page.count < N_KEYS){
+                    assert(printf("Sem overflow\n"));
+                    actual_page.count += 1;
+                    actual_page.keys[actual_page.count-1] = (*propo_key);
+                    actual_page.children[actual_page.count] = (*propo_r_child);
+                    
+                    write_page(fi, actual_page, RRN);
+                }
+                //Overvlow em nó não folha
+                else{
+                    assert(printf("Overflow no nao folha\n"));
+                }
             }
         }
-        
     }
     
     return 0;
