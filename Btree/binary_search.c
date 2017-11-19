@@ -1,8 +1,15 @@
 #include<stdio.h>
+#include<assert.h>
+#include"btree.h"
 
 //Adaptado de https://pt.wikipedia.org/wiki/Pesquisa_bin%C3%A1ria
+/*
+Retorna a posição onde a chave buscada está (ou deveria estar).
+*/
 
-int binary_search (int *array, int size, int key){
+int binary_search (tKey *array, int size, int key){
+    
+    assert(printf("Busca por: %d\n", key));
     
      int begin = 0,
          end = size-1,
@@ -16,14 +23,16 @@ int binary_search (int *array, int size, int key){
      while (begin <= end){
          
           middle = (begin + end)/2;
+    
+          assert(printf("Compara %d com %d\n", key, array[middle].key));      
           
-          if (key == array[middle])
+          if (key == array[middle].key)
                return middle;
-          else if (key < array[middle])
+          else if (key < array[middle].key)
                end = middle-1;
           else
                begin = middle+1;
      }
      
-     return -1;   
+     return middle;   
 }

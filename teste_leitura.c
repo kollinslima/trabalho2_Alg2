@@ -43,9 +43,13 @@ void main(void){
     
     fseek(fi, sizeof(tHeader), SEEK_SET);       //Pula o Header
     
+    int pag_count = 0;
     
     while(fread(&reader_page, sizeof(tPage),1,fi) == 1){
         
+        puts("");
+        printf("Pagina: %d", pag_count);
+        pag_count += 1;
         puts("");
         
         printf("Count: %d\n", reader_page.count);
