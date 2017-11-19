@@ -31,7 +31,7 @@ int binary_search (tKey *array, int size, int key);
 int get_free_RRN(FILE *fi);
 int get_root_RRN(FILE *fi);
 int insert_btree(FILE *fi, int RRN, tKey key, tKey *propo_key, int *propo_r_child);
-int search_btree(FILE *fi, int RRN, int key, int found_RRN, int found_position);
+int search_btree(FILE *fi, int RRN, int key, int *found_RRN, int *found_position);
 int set_header_update(FILE *fi, int status);
 int sort_keys(tKey *key_array, int size_key, int *children);
 int split(FILE *fi, tPage *page, int RRN, tKey key, int r_child_connect, tKey *propo_key, int *propo_r_child);

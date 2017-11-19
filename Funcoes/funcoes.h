@@ -4,7 +4,6 @@
 #define MENU_SIZE 6
 #define MAX_BUFFER_SIZE 100
 
-
 #define NOME_DADOS "dados.dad"
 #define NOME_INDICE "arvore.idx"
 #define NOME_LOG "log_X.txt"

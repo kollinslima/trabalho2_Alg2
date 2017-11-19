@@ -22,16 +22,24 @@ int inserir_elemento (FILE *fd, FILE *fi, FILE *fl){
     printf("ID: ");
     scanf("%d", &novo_registro.id);
     
+    //Limpar buffer de entrada
+    while ((aux_clear = getchar()) != '\n' && aux_clear != EOF);
+    
     printf("Titulo: ");
-    scanf("%s",novo_registro.titulo);
-    //fgets(novo_registro.titulo,30,stdin);
+    //scanf("%s",novo_registro.titulo);
+    fgets(novo_registro.titulo,30,stdin);
     
     //Limpar buffer de entrada
     //while ((aux_clear = getchar()) != '\n' && aux_clear != EOF);
     
+    assert(printf("Titulo lido: %s", novo_registro.titulo));
+    
     printf("Genero: ");
-    scanf("%s",novo_registro.genero);
-    //fgets(novo_registro.genero,20,stdin);
+    //scanf("%s",novo_registro.genero);
+    fgets(novo_registro.genero,20,stdin);
+    
+    //Limpar buffer de entrada
+    //while ((aux_clear = getchar()) != '\n' && aux_clear != EOF);
     
     /*************COMPOSICAO DO REGISTRO******************/
     sprintf(buffer, "%d|%s|%s|", novo_registro.id, novo_registro.titulo, novo_registro.genero);
@@ -55,5 +63,6 @@ int inserir_elemento (FILE *fd, FILE *fi, FILE *fl){
     set_header_update(fi,1);        //Indice atualizado
     //TRATAR ERROS
     
+    puts("");
     return 0;
 }

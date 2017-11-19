@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include"btree.h"
 
-int search_btree(FILE *fi, int RRN, int key, int found_RRN, int found_position){
+int search_btree(FILE *fi, int RRN, int key, int *found_RRN, int *found_position){
     
     int position;
     tPage search_page;
@@ -15,8 +15,8 @@ int search_btree(FILE *fi, int RRN, int key, int found_RRN, int found_position){
     
     //Key found
     if(search_page.keys[position].key == key){
-        found_RRN = RRN;
-        found_position = position;
+        (*found_RRN) = RRN;
+        (*found_position) = position;
         return 1;
     }
     //search left child
