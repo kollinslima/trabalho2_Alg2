@@ -46,12 +46,13 @@ int inserir_elemento (FILE *fd, FILE *fi, FILE *fl){
     fwrite(&buffer_size,sizeof(buffer_size),1,fd);
     fwrite(buffer,buffer_size,1,fd);
     
-    //header = read_header(fi);
+    set_header_update(fi,0);        //Indice desatualizado
     
     assert(printf("rootRRN: %d\n", get_root_RRN(fi)));
     
     error = insert_btree(fi, get_root_RRN(fi), insert_key, &promo_key, &propo_r_child);
     
+    set_header_update(fi,1);        //Indice atualizado
     //TRATAR ERROS
     
     return 0;

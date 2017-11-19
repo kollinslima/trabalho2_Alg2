@@ -29,7 +29,7 @@ int split(FILE *fi, tPage *page, int RRN, tKey key, int r_child_connect, tKey *p
         new_count;
     
     /*****************ORDENAÇÃO ANTES DO SPLIT**********************/
-    //Primeira verificação feita manualmente
+    //Primeira verificação (sort) feita manualmente pois está em váriável a parte
     if(key.key < (*page).keys[total_keys-1].key){
         
         int aux = key.key;
