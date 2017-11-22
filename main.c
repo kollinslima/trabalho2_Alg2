@@ -17,7 +17,7 @@ int main(void){
     int escolha = 0,
         i;
     
-    char *menu[] = {"Criar indice", "Inserir musica", "Pesquiar musica por ID", "Remover musica por ID", "Mostrar arvore-B", "Fechar"};
+    char *menu[] = {"Criar indice", "Inserir musica", "Pesquisar musica por ID", "Remover musica por ID", "Mostrar arvore-B", "Fechar"};
     int (*func[])(FILE *fd, FILE *fi, FILE *fl) = {criar_indice,inserir_elemento,pesquisar_elemento,remover_elemento,mostrar_btree};
     
     while(1){

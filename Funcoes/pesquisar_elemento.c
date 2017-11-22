@@ -24,8 +24,17 @@ int pesquisar_elemento (FILE *fd, FILE *fi, FILE *fl){
     printf("Digite o ID a ser buscado: ");
     scanf("%d", &chave_busca);
     
-    elemento_encontrado = search_btree(fi, header.root_RRN, chave_busca, &retorno_RRN, &retorno_posicao);
-    
+    header = read_header(fi);
+    //Primeira inserção
+    if(header.root_RRN == -1)
+        elemento_encontrado = 0;
+    //Verifica se não há duplicação da chave
+    for (int i = 0; i <= header.pages; ++i)
+    {
+        elemento_encontrado = search_btree(fi, i, chave_busca, &retorno_RRN, &retorno_posicao);
+        if (elemento_encontrado)
+            break;
+    }
     //Encontrou elemento
     if(elemento_encontrado){
         assert(printf("Elemento encontrado\n"));
@@ -55,7 +64,7 @@ int pesquisar_elemento (FILE *fd, FILE *fi, FILE *fl){
     //Elemento não encontrado
     else{
         assert(printf("Elemento nao encontrado\n"));
-        
+        printf("Elemento não encontrado\n\n");
     }
     
     return 0;
