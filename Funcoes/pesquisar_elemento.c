@@ -37,7 +37,7 @@ int pesquisar_elemento (FILE *fd, FILE *fi, FILE *fl){
             break;
     }
     //Encontrou elemento
-    if(elemento_encontrado){
+    if(elemento_encontrado > 0){
         assert(printf("Elemento encontrado\n"));
         
         tPage found_page = read_page(fi, retorno_RRN);

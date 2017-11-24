@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<string.h>
+#include<stdlib.h>
 #include<assert.h>
 #include"funcoes.h"
 #include"btree.h"
@@ -77,10 +78,11 @@ int inserir_elemento (FILE *fd, FILE *fi, FILE *fl){
     }
     else if(elemento_encontrado == 0){
         /*************ESCRITA NO ARQUIVO DE DADOS******************/
+        fseek(fd,0,SEEK_END);
         insert_key.key = novo_registro.id;
         insert_key.offset = ftell(fd);
-        
-        fseek(fd,0,SEEK_END);
+    
+        assert(printf("Inserindo:%d\nOffset:%ld\n", insert_key.key, insert_key.offset));    
         assert(fd != NULL);
         fwrite(&buffer_size,sizeof(buffer_size),1,fd);
         fwrite(buffer,buffer_size,1,fd);
@@ -93,16 +95,16 @@ int inserir_elemento (FILE *fd, FILE *fi, FILE *fl){
         
         if(error == 0){
             fprintf (fl, "  Chave %d inserida com sucesso.\n",novo_registro.id);    
+            assert(printf("Atualiza indice\n"));
+            set_header_update(fi,1);        //Indice atualizado
         }    
         else{
             printf("Error during the insertion\n");
+            exit(0);
         }
-        
-        set_header_update(fi,1);        //Indice atualizado
 
     }
     
-    //TRATAR ERROS
 
     puts("");
     return 0;
