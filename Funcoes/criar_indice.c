@@ -3,7 +3,7 @@
 #include"btree.h"
 
 int criar_indice (FILE *fd, FILE *fi, FILE *fl){
-
+/*
     char buffer[MAX_BUFFER_SIZE],
          buffer_size,
          *token;
@@ -61,6 +61,6 @@ int criar_indice (FILE *fd, FILE *fi, FILE *fl){
     //fechamento do arquivo de dados e de índice
     fclose(fd);
     fclose(fi);
-
+*/
     return 0;
 }

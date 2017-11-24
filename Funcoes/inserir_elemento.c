@@ -8,7 +8,7 @@ int inserir_elemento (FILE *fd, FILE *fi, FILE *fl){
     
     //tHeader header;
     tKey insert_key, promo_key;
-    int propo_r_child;
+    int propo_r_child, i;
     
     int error, elemento_encontrado, chave_busca, retorno_RRN, retorno_posicao;
     
@@ -60,7 +60,7 @@ int inserir_elemento (FILE *fd, FILE *fi, FILE *fl){
     if(header.root_RRN == -1)
         elemento_encontrado = 0;
     //Verifica se não há duplicação da chave
-    for (int i = 0; i <= header.pages; ++i)
+    for (i = 0; i <= header.pages; ++i)
     {
         elemento_encontrado = search_btree(fi, i, novo_registro.id, &retorno_RRN, &retorno_posicao);
         if (elemento_encontrado)

@@ -32,14 +32,14 @@ int split(FILE *fi, tPage *page, int RRN, tKey key, int r_child_connect, tKey *p
     //Primeira verificação (sort) feita manualmente pois está em váriável a parte
     if(key.key < (*page).keys[total_keys-1].key){
         
-        int aux = key.key;
-        key.key = (*page).keys[total_keys-1].key;
-        (*page).keys[total_keys-1].key = aux;
+        tKey aux = key;
+        key = (*page).keys[total_keys-1];
+        (*page).keys[total_keys-1] = aux;
         
         //Move ponteiro da direita para nova posição
-        aux = r_child_connect;
+        int aux_pointer = r_child_connect;
         r_child_connect = (*page).children[total_keys];
-        (*page).children[total_keys] = aux;
+        (*page).children[total_keys] = aux_pointer;
     }
     
     //Ordenação das demais chaves

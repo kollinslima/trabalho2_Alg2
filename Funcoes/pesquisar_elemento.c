@@ -17,7 +17,8 @@ int pesquisar_elemento (FILE *fd, FILE *fi, FILE *fl){
     int elemento_encontrado,
         chave_busca,
         retorno_RRN,
-        retorno_posicao;
+        retorno_posicao,
+        i;
         
     header = read_header(fi);
     
@@ -29,7 +30,7 @@ int pesquisar_elemento (FILE *fd, FILE *fi, FILE *fl){
     if(header.root_RRN == -1)
         elemento_encontrado = 0;
     //Verifica se não há duplicação da chave
-    for (int i = 0; i <= header.pages; ++i)
+    for (i = 0; i <= header.pages; ++i)
     {
         elemento_encontrado = search_btree(fi, i, chave_busca, &retorno_RRN, &retorno_posicao);
         if (elemento_encontrado)
