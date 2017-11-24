@@ -16,7 +16,7 @@ typedef struct{
 
 int init (FILE **fd, FILE **fi, FILE **fl);
 
-int criar_indice (FILE *fd, FILE *fi, FILE *fl);
+int criar_indice (FILE *fd, FILE **fi, FILE *fl);
 int inserir_elemento (FILE *fd, FILE *fi, FILE *fl);
 int pesquisar_elemento (FILE *fd, FILE *fi, FILE *fl);
 int remover_elemento (FILE *fd, FILE *fi, FILE *fl);

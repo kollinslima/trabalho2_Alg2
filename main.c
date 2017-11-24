@@ -5,9 +5,9 @@
 
 int main(void){
 
-    FILE *fd,
-         *fi,
-         *fl;
+    FILE *fd = NULL,
+         *fi = NULL,
+         *fl = NULL;
     
     assert(printf("Ordem: %d\n", ORDER));
     assert(printf("Chaves: %d\n", N_KEYS));
@@ -18,7 +18,7 @@ int main(void){
         i;
     
     char *menu[] = {"Criar indice", "Inserir musica", "Pesquisar musica por ID", "Remover musica por ID", "Mostrar arvore-B", "Fechar"};
-    int (*func[])(FILE *fd, FILE *fi, FILE *fl) = {criar_indice,inserir_elemento,pesquisar_elemento,remover_elemento,mostrar_btree};
+    int (*func[])(FILE *fd, FILE *fi, FILE *fl) = {inserir_elemento,pesquisar_elemento,remover_elemento,mostrar_btree};
     
     while(1){
         printf("Escolha uma opcao:\n");
@@ -33,8 +33,11 @@ int main(void){
             printf("\nOpcao Invalida\n");
         else if(escolha == MENU_SIZE)           //Última opção é sempre para fechar
             break;
+        else if(escolha == 1){
+            criar_indice(fd, &fi, fl);
+        }
         else
-            (*func[escolha-1])(fd,fi,fl);
+            (*func[escolha-2])(fd,fi,fl);
         
     }
     

@@ -6,6 +6,7 @@
 
 int inserir_elemento (FILE *fd, FILE *fi, FILE *fl){
     
+    assert(printf("Função de inserção\n"));
     //tHeader header;
     tKey insert_key, promo_key;
     int propo_r_child, i;
@@ -59,12 +60,14 @@ int inserir_elemento (FILE *fd, FILE *fi, FILE *fl){
     //Primeira inserção
     if(header.root_RRN == -1)
         elemento_encontrado = 0;
-    //Verifica se não há duplicação da chave
-    for (i = 0; i <= header.pages; ++i)
-    {
-        elemento_encontrado = search_btree(fi, i, novo_registro.id, &retorno_RRN, &retorno_posicao);
-        if (elemento_encontrado)
-            break;
+    else{
+        //Verifica se não há duplicação da chave
+        for (i = 0; i <= header.pages; ++i)
+        {
+            elemento_encontrado = search_btree(fi, i, novo_registro.id, &retorno_RRN, &retorno_posicao);
+            if (elemento_encontrado)
+                break;
+        }
     }
     
     assert(printf("ENCONTRADO:%d\n", elemento_encontrado));

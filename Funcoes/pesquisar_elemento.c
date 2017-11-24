@@ -65,7 +65,7 @@ int pesquisar_elemento (FILE *fd, FILE *fi, FILE *fl){
     //Elemento não encontrado
     else{
         assert(printf("Elemento nao encontrado\n"));
-        printf("Elemento não encontrado\n\n");
+        printf("Elemento nao encontrado\n\n");
     }
     
     return 0;

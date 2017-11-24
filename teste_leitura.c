@@ -11,6 +11,7 @@ typedef struct{
     int root_RRN;
     int updated;
     int free_slot;
+    int pages;
 }tHeader;
 
 typedef struct{
@@ -38,6 +39,11 @@ void main(void){
     printf("updated: %d\n", reader.updated);
     printf("free_slot: %d\n", reader.free_slot);
     
+    //Desatualiza indice
+    reader.updated = 0;
+    fseek(fi, 0, SEEK_SET);
+    fwrite(&reader, sizeof(tHeader),1,fi);
+    
     puts("");
     tPage reader_page;
     
@@ -64,8 +70,8 @@ void main(void){
         }
             
         printf("leaf: %d\n", reader_page.isLeaf);
-        
-    
     
     }
+    
+    fclose(fi);
 }

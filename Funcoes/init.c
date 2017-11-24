@@ -23,6 +23,17 @@ int init (FILE **fd, FILE **fi, FILE **fl){
     
     assert((*fd)!=NULL);
     
+    (*fl) = fopen(NOME_LOG,"r+");
+    
+    if((*fl) == NULL){                      //Verifica existência do arquivo
+        (*fl) = fopen(NOME_LOG,"w+");
+        
+        if((*fl) == NULL){
+            printf("ERRO AO CRIAR ARQUIVO DE LOG");
+            return -1;
+        }
+    }
+    
     (*fi) = fopen(NOME_INDICE,"r+b");
     
     if((*fi) == NULL){                      //Verifica existência do arquivo
@@ -38,26 +49,20 @@ int init (FILE **fd, FILE **fi, FILE **fl){
         new_header.root_RRN = -1;
         new_header.updated = 1;
         new_header.free_slot = 0;
-        new_header.pages = -1;
         
         int error_test;
         error_test = fwrite(&new_header, sizeof(tHeader), 1, (*fi));
         
         assert(error_test == 1);
     }
-    
-    (*fl) = fopen(NOME_LOG,"r+");
-    
-    if((*fl) == NULL){                      //Verifica existência do arquivo
-        (*fl) = fopen(NOME_LOG,"w+");
+    else{
+        tHeader check_header = read_header((*fi));
         
-        if((*fl) == NULL){
-            printf("ERRO AO CRIAR ARQUIVO DE LOG");
-            return -1;
-        }
+        assert(printf("Arquivo nao atualizado, refazendo indice...\n"));
+        //Refaz o índice se não estiver atualizado
+        if(!check_header.updated)
+            criar_indice((*fd), fi, (*fl));
     }
-    
-    //VERIFICAR SE INDICE ESTÁ ATUALIZADO
     
     return 0;
 }
