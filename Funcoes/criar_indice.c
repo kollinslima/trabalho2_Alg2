@@ -35,7 +35,8 @@ int criar_indice (FILE *fd, FILE **fi, FILE *fl){
         printf("Error during the opening of index file\n");
     }
 */
-
+    //Registro no arquivo de log da criacao do indice
+    fprintf (fl, "Execucao da criacao do arquivo de indice %s com base no arquivo de dados %s.\n", NOME_INDICE, NOME_DADOS);
     //Reabre arquivo de indice, apagando conteúdo anterior
     assert(printf("Reabrindo arquivo\n"));
     fclose((*fi));

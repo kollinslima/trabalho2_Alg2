@@ -69,14 +69,14 @@ int pesquisar_elemento (FILE *fd, FILE *fi, FILE *fl){
 
         strtok(token_titulo,"\n");
         strtok(token_genero,"\n");
-        fprintf (fl, "Chave %s encontrada, offset %ld, Titulo: %s, Genero: %s.\n", token_id, found_key.offset, token_titulo, token_genero);
+        fprintf (fl, "  Chave %s encontrada, offset %ld, Titulo: %s, Genero: %s.\n", token_id, found_key.offset, token_titulo, token_genero);
 
         puts("");
     }
     //Elemento não encontrado
     else{
         assert(printf("Elemento nao encontrado\n"));
-        fprintf (fl, "Chave %d não encontrada.\n",chave_busca);
+        fprintf (fl, "  Chave %d não encontrada.\n",chave_busca);
         printf("Elemento nao encontrado\n\n");
     }
     
