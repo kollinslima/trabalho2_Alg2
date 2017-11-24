@@ -9,7 +9,7 @@ int pesquisar_elemento (FILE *fd, FILE *fi, FILE *fl){
     tHeader header;
     
     const char delimiter[2] = "|";
-    char *token;
+    char *token_id, *token_titulo, *token_genero;
     
     char buffer[MAX_BUFFER_SIZE],
          buffer_size;
@@ -24,17 +24,23 @@ int pesquisar_elemento (FILE *fd, FILE *fi, FILE *fl){
     
     printf("Digite o ID a ser buscado: ");
     scanf("%d", &chave_busca);
+
+    //Registro no arquivo de log da operacao de busca
+    fprintf (fl, "Execucao de operacao de PESQUISA de %d.\n",chave_busca); 
     
     header = read_header(fi);
     //Primeira inserção
-    if(header.root_RRN == -1)
+    if(header.root_RRN == -1){
         elemento_encontrado = 0;
-    //Verifica se não há duplicação da chave
-    for (i = 0; i <= header.pages; ++i)
-    {
-        elemento_encontrado = search_btree(fi, i, chave_busca, &retorno_RRN, &retorno_posicao);
-        if (elemento_encontrado)
-            break;
+    }
+    else{
+        //Verifica se não há duplicação da chave
+        for (i = 0; i <= header.pages; ++i)
+        {
+            elemento_encontrado = search_btree(fi, i, chave_busca, &retorno_RRN, &retorno_posicao);
+            if (elemento_encontrado)
+                break;
+        }
     }
     //Encontrou elemento
     if(elemento_encontrado > 0){
@@ -52,19 +58,25 @@ int pesquisar_elemento (FILE *fd, FILE *fi, FILE *fl){
         fread(buffer, buffer_size, 1, fd);                 //Leitura do registro
         
         puts("");
-        token = strtok(buffer, delimiter);
-        printf("ID: %s\n", token);
+        token_id = strtok(buffer, delimiter);
+        printf("ID: %s\n", token_id);
     
-        token = strtok(NULL, delimiter);
-        printf("Titulo: %s", token);
+        token_titulo = strtok(NULL, delimiter);
+        printf("Titulo: %s", token_titulo);
         
-        token = strtok(NULL, delimiter);
-        printf("Genero: %s", token);
+        token_genero = strtok(NULL, delimiter);
+        printf("Genero: %s", token_genero);
+
+        strtok(token_titulo,"\n");
+        strtok(token_genero,"\n");
+        fprintf (fl, "Chave %s encontrada, offset %ld, Titulo: %s, Genero: %s.\n", token_id, found_key.offset, token_titulo, token_genero);
+
         puts("");
     }
     //Elemento não encontrado
     else{
         assert(printf("Elemento nao encontrado\n"));
+        fprintf (fl, "Chave %d não encontrada.\n",chave_busca);
         printf("Elemento nao encontrado\n\n");
     }
     
