@@ -80,6 +80,7 @@ int inserir_elemento (FILE *fd, FILE *fi, FILE *fl){
         insert_key.key = novo_registro.id;
         insert_key.offset = ftell(fd);
         
+        fseek(fd,0,SEEK_END);
         assert(fd != NULL);
         fwrite(&buffer_size,sizeof(buffer_size),1,fd);
         fwrite(buffer,buffer_size,1,fd);
