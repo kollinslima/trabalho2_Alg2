@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="T2-gleite" />
+		<Option makefile_is_custom="1" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/T2-gleite" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/T2-gleite" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="Btree/Makefile" />
+		<Unit filename="Btree/binary_search.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Btree/btree.h" />
+		<Unit filename="Btree/get_free_RRN.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Btree/get_root_RRN.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Btree/insert_btree.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Btree/new_page.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Btree/read_header.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Btree/read_page.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Btree/search_btree.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Btree/set_header_update.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Btree/set_update_pages.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Btree/sort_keys.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Btree/split.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Btree/update_free_slot.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Btree/update_root.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Btree/write_header.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Btree/write_page.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Funcoes/Makefile" />
+		<Unit filename="Funcoes/criar_indice.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Funcoes/funcoes.h" />
+		<Unit filename="Funcoes/init.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Funcoes/inserir_elemento.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Funcoes/mostrar_btree.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Funcoes/pesquisar_elemento.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Funcoes/remover_elemento.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Makefile" />
+		<Unit filename="main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="teste_leitura.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
